@@ -22,7 +22,16 @@ export const signup = async (req, res) => {
     //* el userSaved contiene los datos del usuario guardado en la base de datos
     const userSaved = await newUser.save();
 
+    //* Crear un token de acceso
     const token = await createAccessToken({ id: userSaved._id });
+
+    //* Guardar el token en una cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      maxAge: 24 * 60 * 60 * 1000, // 1 dia
+    });
 
     //* Responder al cliente con el usuario guardado
     res.status(201).json({
@@ -31,7 +40,6 @@ export const signup = async (req, res) => {
       email: userSaved.email,
       createdAt: userSaved.createdAt,
       updatedAt: userSaved.updatedAt,
-      token,
     });
   } catch (error) {
     res.status(500).json({ message: "Ocurrió un error" });
