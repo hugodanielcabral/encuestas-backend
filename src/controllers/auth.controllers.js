@@ -5,9 +5,13 @@ import { createAccessToken } from "../libs/jwt.js";
 export const signup = async (req, res) => {
   const { username, email, password } = req.body;
 
-  //TODO antes de crear un usuario, verificar que no exista otro con el mismo email o username.
-
   try {
+    //* Verificar si el usuario o correo ya existe
+    const userExists = await User.findOne({ email: email, username: username });
+
+    if (userExists) {
+      return res.status(400).json({ message: "El usuario o correo ya existe" });
+    }
     //* Encriptar la contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
 
