@@ -1,5 +1,5 @@
 import Router from "express";
-import { signup, signin, signout } from "../controllers/auth.controllers.js";
+import { signup, signin, signout } from "../controllers/auth.controller.js";
 import {
   signupValidator,
   signinValidator,

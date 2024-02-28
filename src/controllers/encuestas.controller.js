@@ -1,5 +1,7 @@
 import Encuestas from "../models/encuestas.model.js";
 
+//TODO Hacer las validaciones
+
 export const getEncuestas = async (req, res) => {
   try {
     const encuestaData = await Encuestas.find();
@@ -36,6 +38,7 @@ export const createEncuesta = async (req, res) => {
       preguntas,
       respuestas,
       categoria,
+      user: req.userId,
     });
 
     const encuestaSaved = await newEncuesta.save();
