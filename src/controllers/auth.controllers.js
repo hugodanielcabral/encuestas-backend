@@ -62,7 +62,7 @@ export const signin = async (req, res) => {
     }
 
     //* Verificar la contraseña
-    const hashedPassword = await bcrypt.compare(password, user.password);
+    const hashedPassword = await bcrypt.compare(password, user.password); 
 
     //* Si la contraseña no coincide
     if (!hashedPassword) {
