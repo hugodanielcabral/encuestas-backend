@@ -5,11 +5,23 @@ export const getEncuestas = async (req, res) => {
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 6;
     const skip = (page - 1) * limit;
+    const sort = req.query.sort || "createdAt";
+    const order = req.query.order === "desc" ? -1 : 1;
+    let categoria = req.query.categoria;
 
-    const totalDocs = await Encuestas.countDocuments();
+    if (categoria === "Default") {
+      categoria = "";
+    }
+
+    const filter = categoria ? { categoria } : {};
+
+    const totalDocs = await Encuestas.countDocuments(filter);
     const totalPages = Math.ceil(totalDocs / limit);
 
-    const encuestaData = await Encuestas.find().skip(skip).limit(limit);
+    const encuestaData = await Encuestas.find(filter)
+      .skip(skip)
+      .limit(limit)
+      .sort({ [sort]: order });
 
     return res.status(200).json({
       totalPages,
