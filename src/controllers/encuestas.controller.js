@@ -1,7 +1,5 @@
 import Encuestas from "../models/encuestas.model.js";
 
-//TODO Hacer las validaciones
-
 export const getEncuestas = async (req, res) => {
   try {
     const encuestaData = await Encuestas.find();
