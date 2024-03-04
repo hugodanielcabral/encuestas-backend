@@ -36,6 +36,7 @@ export const createEncuesta = async (req, res) => {
       preguntas,
       respuestas,
       categoria,
+      user: req.userId,
     });
 
     const encuestaSaved = await newEncuesta.save();
