@@ -4,6 +4,7 @@ import { createAccessToken } from "../libs/jwt.js";
 
 export const signup = async (req, res) => {
   const { username, email, password } = req.body;
+  console.log(username);
 
   try {
     //* Verificar si el usuario o correo ya existe
@@ -31,8 +32,8 @@ export const signup = async (req, res) => {
 
     //* Guardar el token en una cookie
     res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "None",
+      /*       httpOnly: true,
+       */ sameSite: "None",
       secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 dia
     });
