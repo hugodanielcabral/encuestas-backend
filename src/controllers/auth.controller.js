@@ -3,14 +3,15 @@ import bcrypt from "bcryptjs";
 import { createAccessToken } from "../libs/jwt.js";
 
 export const signup = async (req, res) => {
-  const { username, email, password, confirmPassword } = req.body;
+  const { username, email, password} = req.body;
+  console.log(username, email, password);
 
   try {
     //* Verificar si el usuario o correo ya existe
     const userExists = await User.findOne({ email: email});
 
     if (userExists) {
-      return res.status(400).json({ message: `El email ${email} ya está registrado`});
+      return res.status(400).json({ message: `El email ${email} ya está registrado` });
     }
     //* Encriptar la contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -19,8 +20,7 @@ export const signup = async (req, res) => {
     const newUser = new User({
       username,
       email,
-      password: hashedPassword,
-      confirmPassword
+      password: hashedPassword
     });
 
     //* Guardar el usuario en la base de datos
