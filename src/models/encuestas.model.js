@@ -22,7 +22,7 @@ const encuestasSchema = new mongoose.Schema(
     },
     categoria: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Categorias", // Referencia a Categorias
+      ref: "Categorias",
       required: true,
     },
     user: {

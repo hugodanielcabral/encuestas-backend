@@ -5,6 +5,7 @@ import cors from "cors";
 
 import authRoutes from "./routes/auth.routes.js";
 import encuestasRoutes from "./routes/encuestas.routes.js";
+import categoriasRoutes from "./routes/categorias.routes.js";
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use(
 
 app.use("/api", authRoutes);
 app.use("/api", encuestasRoutes);
+app.use("/api", categoriasRoutes);
 
 export default app;
