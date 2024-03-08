@@ -30,6 +30,10 @@ const encuestasSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    available: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

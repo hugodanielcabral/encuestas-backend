@@ -1,4 +1,5 @@
 import Encuestas from "../models/encuestas.model.js";
+import mongoose from "mongoose";
 
 export const getEncuestas = async (req, res) => {
   try {
@@ -30,7 +31,8 @@ export const getEncuestas = async (req, res) => {
       encuestas: encuestaData,
     });
   } catch (error) {
-    return res.status(500).json({ message: "Ocurrió un error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -52,7 +54,8 @@ export const getEncuesta = async (req, res) => {
 
 export const createEncuesta = async (req, res) => {
   try {
-    const { nombre, descripcion, preguntas, respuestas, categoria } = req.body;
+    const { nombre, descripcion, preguntas, respuestas, categoria, available } =
+      req.body;
 
     const newEncuesta = new Encuestas({
       nombre,
@@ -61,6 +64,7 @@ export const createEncuesta = async (req, res) => {
       respuestas,
       categoria,
       user: req.userId,
+      available,
     });
 
     const encuestaSaved = await newEncuesta.save();
@@ -74,7 +78,8 @@ export const createEncuesta = async (req, res) => {
 export const updateEncuesta = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, descripcion, preguntas, respuestas, categoria } = req.body;
+    const { nombre, descripcion, preguntas, respuestas, categoria, available } =
+      req.body;
 
     const encuestaData = await Encuestas.findById(id);
 
@@ -87,6 +92,7 @@ export const updateEncuesta = async (req, res) => {
     encuestaData.preguntas = preguntas;
     encuestaData.respuestas = respuestas;
     encuestaData.categoria = categoria;
+    encuestaData.available = available;
 
     const encuestaUpdated = await encuestaData.save();
 
