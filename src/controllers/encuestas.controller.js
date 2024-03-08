@@ -19,6 +19,7 @@ export const getEncuestas = async (req, res) => {
     const totalPages = Math.ceil(totalDocs / limit);
 
     const encuestaData = await Encuestas.find(filter)
+      .populate("categoria")
       .skip(skip)
       .limit(limit)
       .sort({ [sort]: order });
@@ -37,7 +38,7 @@ export const getEncuesta = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const encuestaData = await Encuestas.findById(id);
+    const encuestaData = await Encuestas.findById(id).populate("categoria");
 
     if (!encuestaData) {
       return res.status(404).json({ message: "Encuesta no encontrada" });
