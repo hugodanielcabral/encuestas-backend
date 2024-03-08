@@ -8,6 +8,7 @@ import {
   updateRol,
   deleteRol,
 } from "../controllers/roles.controller.js";
+import { rolesValidator } from "../validators/roles.validator.js";
 
 const router = Router();
 
@@ -15,10 +16,10 @@ router.get("/roles", getRoles);
 
 router.get("/roles/:id", getRol);
 
-router.post("/roles", createRol);
+router.post("/roles", isAuth, rolesValidator, createRol);
 
-router.put("/roles/:id", updateRol);
+router.put("/roles/:id", isAuth, rolesValidator, updateRol);
 
-router.delete("/roles/:id", deleteRol);
+router.delete("/roles/:id", isAuth, deleteRol);
 
 export default router;
