@@ -80,8 +80,7 @@ export const createEncuesta = async (req, res) => {
 export const updateEncuesta = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, descripcion, preguntas, respuestas, categoria, available } =
-      req.body;
+    const updateData = req.body;
 
     const encuestaData = await Encuestas.findById(id);
 
@@ -89,14 +88,13 @@ export const updateEncuesta = async (req, res) => {
       return res.status(404).json({ message: "Encuesta no encontrada" });
     }
 
-    encuestaData.nombre = nombre;
-    encuestaData.descripcion = descripcion;
-    encuestaData.preguntas = preguntas;
-    encuestaData.respuestas = respuestas;
-    encuestaData.categoria = categoria;
-    encuestaData.available = available;
+    const encuestaUpdated = await Encuestas.updateOne({ _id: id }, updateData);
 
-    const encuestaUpdated = await encuestaData.save();
+    if (!encuestaUpdated) {
+      return res
+        .status(400)
+        .json({ message: "Error al actualizar la encuesta" });
+    }
 
     return res.status(200).json(encuestaUpdated);
   } catch (error) {

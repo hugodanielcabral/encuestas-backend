@@ -17,7 +17,7 @@ router.get("/encuestas/:id", /* isAuth, */ getEncuesta);
 
 router.post("/encuestas", /* isAuth,  */ encuestaValidator, createEncuesta);
 
-router.put("/encuestas/:id", /* isAuth, */ encuestaValidator, updateEncuesta);
+router.patch("/encuestas/:id", /* isAuth, */ encuestaValidator, updateEncuesta);
 
 router.delete("/encuestas/:id", isAuth, deleteEncuesta);
 
