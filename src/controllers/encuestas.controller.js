@@ -48,7 +48,8 @@ export const getEncuesta = async (req, res) => {
 
     return res.status(200).json(encuestaData);
   } catch (error) {
-    return res.status(500).json({ message: "Ocurrió un error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -71,7 +72,8 @@ export const createEncuesta = async (req, res) => {
 
     return res.status(201).json(encuestaSaved);
   } catch (error) {
-    return res.status(500).json({ message: "Ocurrió un error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -98,7 +100,8 @@ export const updateEncuesta = async (req, res) => {
 
     return res.status(200).json(encuestaUpdated);
   } catch (error) {
-    return res.status(500).json({ message: "Ocurrió un error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -116,6 +119,7 @@ export const deleteEncuesta = async (req, res) => {
 
     return res.status(200).json({ message: "Encuesta eliminada" });
   } catch (error) {
-    return res.status(500).json({ message: "Ocurrió un error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
