@@ -8,18 +8,18 @@ export const signup = async (req, res) => {
 
   try {
     // Verificar si el usuario o correo ya existe
-    const userExists = await User.findOne({ email: email, username: username });
+    const userExists = await User.findOne({ email: email });
 
     if (userExists) {
       return res.status(400).json({ message: "El usuario o correo ya existe" });
     }
 
     // Verificar si los roles existen
-    const rolesExist = await Roles.find({ _id: { $in: roles } });
+    // const rolesExist = await Roles.find({ _id: { $in: roles } });
 
-    if (roles.length !== rolesExist.length) {
-      return res.status(400).json({ message: "Uno o más roles no existen" });
-    }
+    // if (roles.length !== rolesExist.length) {
+    //   return res.status(400).json({ message: "Uno o más roles no existen" });
+    // }
 
     // Encriptar la contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
