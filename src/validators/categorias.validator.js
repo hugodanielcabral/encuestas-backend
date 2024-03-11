@@ -34,6 +34,13 @@ export const categoriaValidator = [
     .withMessage(
       "La descripción de la categoría no puede tener más de 100 caracteres"
     ),
+  check("imagen")
+    .exists()
+    .withMessage("La imagen de la categoría es requerida")
+    .notEmpty()
+    .withMessage("La imagen de la categoría no puede estar vacía")
+    .matches(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|png)/)
+    .withMessage("La imagen de la categoría debe ser de tipo JPG, JPEG o PNG"),
   (req, res, next) => {
     validateResult(req, res, next);
   },

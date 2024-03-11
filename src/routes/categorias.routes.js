@@ -15,10 +15,14 @@ router.get("/categorias", getCategorias);
 
 router.get("/categorias/:id", getCategoria);
 
-router.post("/categorias", isAuth, categoriaValidator, createCategoria);
+router.post("/categorias", /* isAuth, */ categoriaValidator, createCategoria);
 
-router.put("/categorias/:id", isAuth, categoriaValidator, updateCategoria);
+router.put(
+  "/categorias/:id",
+  /* isAuth, */ categoriaValidator,
+  updateCategoria
+);
 
-router.delete("/categorias/:id", isAuth, deleteCategoria);
+router.delete("/categorias/:id", /* isAuth, */ deleteCategoria);
 
 export default router;

@@ -12,6 +12,11 @@ const categoriasSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    imagen: {
+      type: String,
+      required: true,
+      trim: true,
+    },
   },
   {
     timestamps: true,
