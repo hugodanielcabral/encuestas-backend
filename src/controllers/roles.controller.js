@@ -6,7 +6,8 @@ export const getRoles = async (req, res) => {
 
     return res.status(200).json(rolesData);
   } catch (error) {
-    return res.status(500).json({ message: "Ocurrió un error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -22,7 +23,8 @@ export const getRol = async (req, res) => {
 
     return res.status(200).json(rolData);
   } catch (error) {
-    return res.status(500).json({ message: "Ocurrió un error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -39,7 +41,8 @@ export const createRol = async (req, res) => {
 
     return res.status(201).json(rolSaved);
   } catch (error) {
-    return res.status(500).json({ message: "Ocurrió un error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -61,7 +64,8 @@ export const updateRol = async (req, res) => {
 
     return res.status(200).json(rolUpdated);
   } catch (error) {
-    return res.status(500).json({ message: "Ocurrió un error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -77,6 +81,7 @@ export const deleteRol = async (req, res) => {
 
     return res.status(200).json({ message: "Rol eliminado" });
   } catch (error) {
-    return res.status(500).json({ message: "Ocurrió un error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
