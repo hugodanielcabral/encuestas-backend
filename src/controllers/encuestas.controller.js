@@ -58,6 +58,8 @@ export const createEncuesta = async (req, res) => {
     const { nombre, descripcion, preguntas, respuestas, categoria, available } =
       req.body;
 
+    console.log(req.userId);
+
     const newEncuesta = new Encuestas({
       nombre,
       descripcion,
