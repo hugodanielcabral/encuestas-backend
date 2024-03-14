@@ -25,6 +25,12 @@ export const getEncuestas = async (req, res) => {
       .limit(limit)
       .sort({ [sort]: order });
 
+    encuestaData.forEach((encuesta) => {
+      if (!encuesta.categoria) {
+        encuesta.categoria = { nombre: "Sin categoría" };
+      }
+    });
+
     return res.status(200).json({
       totalPages,
       currentPage: page,
@@ -44,6 +50,10 @@ export const getEncuesta = async (req, res) => {
 
     if (!encuestaData) {
       return res.status(404).json({ message: "Encuesta no encontrada" });
+    }
+
+    if (!encuestaData.categoria) {
+      encuestaData.categoria = { nombre: "Sin categoría" };
     }
 
     return res.status(200).json(encuestaData);
