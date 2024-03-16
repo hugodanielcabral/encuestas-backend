@@ -2,6 +2,7 @@ import Router from "express";
 import {
   getEncuestas,
   getEncuesta,
+  getEncuestasPorCategoria,
   createEncuesta,
   updateEncuesta,
   deleteEncuesta,
@@ -15,9 +16,14 @@ router.get("/encuestas", /* isAuth, */ getEncuestas);
 
 router.get("/encuestas/:id", /* isAuth, */ getEncuesta);
 
+router.get(
+  "/encuestas/categoria/:categoria",
+  /* isAuth, */ getEncuestasPorCategoria
+);
+
 router.post("/encuestas", isAuth, encuestaValidator, createEncuesta);
 
-router.patch("/encuestas/:id", isAuth, encuestaValidator, updateEncuesta);
+router.patch("/encuestas/:id", /* isAuth, */ encuestaValidator, updateEncuesta);
 
 router.delete("/encuestas/:id", isAuth, deleteEncuesta);
 
