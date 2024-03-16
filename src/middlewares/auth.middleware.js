@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 //* Middleware para verificar si el usuario está autenticado
 export const isAuth = (req, res, next) => {
@@ -9,7 +11,7 @@ export const isAuth = (req, res, next) => {
     return res.status(401).json({ message: "No autorizado" });
   }
 
-  jwt.verify(token, "secret123456", (err, decoded) => {
+  jwt.verify(token, process.env.SECRET_JWT, (err, decoded) => {
     if (err) {
       return res.status(401).json({ message: "No autorizado" });
     }

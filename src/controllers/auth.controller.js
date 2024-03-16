@@ -90,6 +90,7 @@ export const signin = async (req, res) => {
       sameSite: "none",
       // secure: true,
       maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
     res.status(200).json({
