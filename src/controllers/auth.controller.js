@@ -39,11 +39,11 @@ export const signup = async (req, res) => {
 
     // Crear un token de acceso
     const token = await createAccessToken({ id: userSaved._id });
-
+    console.log(token);
     // Guardar el token en una cookie
     res.cookie("token", token, {
       sameSite: "None",
-      secure: true,
+      // secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 dia
     });
 
@@ -82,13 +82,14 @@ export const signin = async (req, res) => {
 
     //* Crear un token de acceso
     const token = await createAccessToken({ id: user._id });
+    console.log(token);
 
     //* Guardar el token en una cookie
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "none",
-      /*       secure: true,
-       */ maxAge: 24 * 60 * 60 * 1000, // 1 day
+      // secure: true,
+      maxAge: 24 * 60 * 60 * 1000,
     });
 
     res.status(200).json({
