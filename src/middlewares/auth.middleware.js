@@ -16,8 +16,6 @@ export const isAuth = (req, res, next) => {
       return res.status(401).json({ message: "No autorizado" });
     }
 
-    console.log(decoded);
-    console.log(req.userId);
     req.userId = decoded.id;
 
     next();

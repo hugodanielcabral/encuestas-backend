@@ -33,12 +33,12 @@ export const signup = async (req, res) => {
     // Crear un token de acceso
     const token = await createAccessToken({ id: userSaved._id });
 
-    // Guardar el token en una cookie
+    /* // Guardar el token en una cookie
     res.cookie("token", token, {
       sameSite: "None",
       secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 dia
-    });
+    }); */
 
     res.status(201).json({
       id: userSaved._id,
@@ -99,4 +99,15 @@ export const signin = async (req, res) => {
 
 export const signout = (req, res) => {
   res.clearCookie("token").json({ message: "Sesión cerrada" });
+};
+
+export const getUser = async (req, res) => {
+  console.log(req.userId, "req.userId en getUser");
+  try {
+    const user = await User.findById(req.userId).populate("roles");
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
 };
