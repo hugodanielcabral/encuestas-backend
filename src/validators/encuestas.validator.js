@@ -29,10 +29,14 @@ export const encuestaValidator = [
     ),
   check("preguntas")
     .optional()
-    .notEmpty()
-    .withMessage("Las preguntas de la encuesta no pueden estar vacías")
     .isArray()
-    .withMessage("Las preguntas de la encuesta deben ser un arreglo"),
+    .withMessage("Las preguntas de la encuesta deben ser un arreglo")
+    .custom((value) => {
+      if (value.length === 0) {
+        throw new Error("El arreglo de preguntas no debe estar vacío");
+      }
+      return true;
+    }),
   /* check("respuestas")
     .optional()
     .notEmpty()
@@ -41,10 +45,9 @@ export const encuestaValidator = [
     .withMessage("Las respuestas de la encuesta deben ser un arreglo"), */
   check("categoria")
     .notEmpty()
-    .withMessage("La categoría de la encuesta no puede estar vacía")
+    .withMessage("Debes seleccionar una categoria")
     .custom(async (value, { req }) => {
       const categoria = await Categorias.findById(value);
-      console.log(categoria, "categoria");
       if (!categoria) {
         throw new Error("La categoría no existe");
       }

@@ -48,6 +48,7 @@ export const getEncuestas = async (req, res) => {
 export const getEncuesta = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(id, "ID de la encuesta");
 
     const encuestaData = await Encuestas.findById(id).populate("categoria");
 
