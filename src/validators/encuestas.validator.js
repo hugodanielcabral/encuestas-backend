@@ -33,12 +33,12 @@ export const encuestaValidator = [
     .withMessage("Las preguntas de la encuesta no pueden estar vacías")
     .isArray()
     .withMessage("Las preguntas de la encuesta deben ser un arreglo"),
-  check("respuestas")
+  /* check("respuestas")
     .optional()
     .notEmpty()
     .withMessage("Las respuestas de la encuesta no pueden estar vacías")
     .isArray()
-    .withMessage("Las respuestas de la encuesta deben ser un arreglo"),
+    .withMessage("Las respuestas de la encuesta deben ser un arreglo"), */
   check("categoria")
     .notEmpty()
     .withMessage("La categoría de la encuesta no puede estar vacía")

@@ -16,10 +16,10 @@ const encuestasSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
-    respuestas: {
+    /* respuestas: {
       type: Array,
       required: true,
-    },
+    }, */
     categoria: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Categorias",

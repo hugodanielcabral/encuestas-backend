@@ -108,8 +108,13 @@ export const getEncuestasPorCategoria = async (req, res) => {
 
 export const createEncuesta = async (req, res) => {
   try {
-    const { nombre, descripcion, preguntas, respuestas, categoria, available } =
-      req.body;
+    const {
+      nombre,
+      descripcion,
+      preguntas,
+      /* respuestas, */ categoria,
+      available,
+    } = req.body;
 
     console.log(req.userId);
 
@@ -117,7 +122,7 @@ export const createEncuesta = async (req, res) => {
       nombre,
       descripcion,
       preguntas,
-      respuestas,
+      /* respuestas, */
       categoria,
       user: req.userId,
       available,
