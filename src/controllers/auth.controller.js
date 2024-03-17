@@ -33,13 +33,6 @@ export const signup = async (req, res) => {
     // Crear un token de acceso
     const token = await createAccessToken({ id: userSaved._id });
 
-    /* // Guardar el token en una cookie
-    res.cookie("token", token, {
-      sameSite: "None",
-      secure: true,
-      maxAge: 24 * 60 * 60 * 1000, // 1 dia
-    }); */
-
     res.status(201).json({
       id: userSaved._id,
       username: userSaved.username,
@@ -47,6 +40,7 @@ export const signup = async (req, res) => {
       createdAt: userSaved.createdAt,
       updatedAt: userSaved.updatedAt,
       roles: userSaved.roles,
+      encuestasRealizadas: userSaved.encuestasRealizadas,
     });
   } catch (error) {
     console.error(error);
@@ -90,6 +84,7 @@ export const signin = async (req, res) => {
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
       roles: user.roles,
+      encuestasRealizadas: user.encuestasRealizadas,
     });
   } catch (error) {
     console.error(error);
@@ -102,7 +97,6 @@ export const signout = (req, res) => {
 };
 
 export const getUser = async (req, res) => {
-  console.log(req.userId, "req.userId en getUser");
   try {
     const user = await User.findById(req.userId).populate("roles");
     res.status(200).json(user);

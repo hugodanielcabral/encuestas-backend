@@ -1,4 +1,5 @@
 import Encuestas from "../models/encuestas.model.js";
+import User from "../models/users.model.js";
 import mongoose from "mongoose";
 
 export const getEncuestas = async (req, res) => {
@@ -177,6 +178,36 @@ export const deleteEncuesta = async (req, res) => {
     await Encuestas.findByIdAndDelete(id);
 
     return res.status(200).json({ message: "Encuesta eliminada" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const createRealizarEncuesta = async (req, res) => {
+  try {
+    const { preguntasRespuestas, encuesta_id } = req.body;
+
+    const encuestaData = await Encuestas.findById(encuesta_id);
+
+    if (!encuestaData) {
+      return res.status(404).json({ message: "Encuesta no encontrada" });
+    }
+
+    const encuestaRealizada = {
+      encuesta: encuesta_id,
+      user: req.userId,
+      preguntasRespuestas,
+    };
+
+    const user = await User.findById(req.userId);
+
+    console.log(user, "user");
+    user.encuestasRealizadas.push(encuestaRealizada);
+
+    await user.save();
+
+    return res.status(200).json({ message: "Encuesta realizada" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });

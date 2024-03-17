@@ -6,6 +6,7 @@ import {
   createEncuesta,
   updateEncuesta,
   deleteEncuesta,
+  createRealizarEncuesta,
 } from "../controllers/encuestas.controller.js";
 import { isAuth } from "../middlewares/auth.middleware.js";
 import { encuestaValidator } from "../validators/encuestas.validator.js";
@@ -22,6 +23,8 @@ router.get(
 );
 
 router.post("/encuestas", isAuth, encuestaValidator, createEncuesta);
+
+router.post("/encuestas/realizar", isAuth, createRealizarEncuesta);
 
 router.patch("/encuestas/:id", /* isAuth, */ encuestaValidator, updateEncuesta);
 

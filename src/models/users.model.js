@@ -23,6 +23,12 @@ const userSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
       },
     ],
+    encuestasRealizadas: [
+      {
+        ref: "Encuestas",
+        type: mongoose.Schema.Types.Array,
+      },
+    ],
   },
   {
     timestamps: true,
