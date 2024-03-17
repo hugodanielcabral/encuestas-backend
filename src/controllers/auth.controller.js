@@ -78,7 +78,6 @@ export const signin = async (req, res) => {
 
     //* Guardar el token en una cookie
     res.cookie("token", token, {
-      httpOnly: true,
       sameSite: "none",
       secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1 day
