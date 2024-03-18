@@ -96,6 +96,16 @@ export const signout = (req, res) => {
   res.clearCookie("token").json({ message: "Sesión cerrada" });
 };
 
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().populate("roles");
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.userId).populate("roles");
