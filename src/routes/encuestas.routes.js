@@ -3,6 +3,7 @@ import {
   getEncuestas,
   getEncuesta,
   getEncuestasPorCategoria,
+  getEncuestaRealizada,
   createEncuesta,
   updateEncuesta,
   deleteEncuesta,
@@ -20,6 +21,12 @@ router.get("/encuestas/:id", /* isAuth, */ getEncuesta);
 router.get(
   "/encuestas/categoria/:categoria",
   /* isAuth, */ getEncuestasPorCategoria
+);
+
+router.get(
+  "/encuestas/realizadas/:encuestarealizadaid",
+  isAuth,
+  getEncuestaRealizada
 );
 
 router.post("/encuestas", isAuth, encuestaValidator, createEncuesta);

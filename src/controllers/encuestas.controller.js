@@ -212,3 +212,26 @@ export const createRealizarEncuesta = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getEncuestaRealizada = async (req, res) => {
+  try {
+    const { encuestarealizadaid } = req.params;
+
+    const user = await User.findById(req.userId).populate(
+      "encuestasRealizadas.encuesta"
+    );
+
+    const encuestaRealizada = user.encuestasRealizadas.id(encuestarealizadaid);
+
+    if (!encuestaRealizada) {
+      return res
+        .status(404)
+        .json({ message: "Encuesta realizada no encontrada" });
+    }
+
+    return res.status(200).json(encuestaRealizada);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
