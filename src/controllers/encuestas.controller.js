@@ -186,7 +186,7 @@ export const deleteEncuesta = async (req, res) => {
 
 export const createRealizarEncuesta = async (req, res) => {
   try {
-    const { preguntasRespuestas, encuesta_id } = req.body;
+    const { encuesta_id, preguntasRespuestas } = req.body;
 
     const encuestaData = await Encuestas.findById(encuesta_id);
 
@@ -204,7 +204,6 @@ export const createRealizarEncuesta = async (req, res) => {
 
     console.log(user, "user");
     user.encuestasRealizadas.push(encuestaRealizada);
-
     await user.save();
 
     return res.status(200).json({ message: "Encuesta realizada" });

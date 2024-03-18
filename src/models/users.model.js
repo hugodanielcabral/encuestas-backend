@@ -25,8 +25,20 @@ const userSchema = new mongoose.Schema(
     ],
     encuestasRealizadas: [
       {
-        ref: "Encuestas",
-        type: mongoose.Schema.Types.Array,
+        encuesta: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Encuestas",
+        },
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+        preguntasRespuestas: [
+          {
+            pregunta: String,
+            respuestas: [String],
+          },
+        ],
       },
     ],
   },
