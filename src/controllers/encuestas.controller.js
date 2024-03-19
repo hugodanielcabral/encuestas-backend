@@ -47,7 +47,6 @@ export const getEncuestas = async (req, res) => {
 export const getEncuesta = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id, "ID de la encuesta");
 
     const encuestaData = await Encuestas.findById(id).populate("categoria");
 
@@ -112,7 +111,6 @@ export const getEncuestasPorCategoria = async (req, res) => {
 export const getEncuestasPorUsuarioId = async (req, res) => {
   try {
     const userId = req.userId;
-    console.log();
 
     const encuestas = await Encuestas.find({ user: userId });
 
@@ -121,7 +119,6 @@ export const getEncuestasPorUsuarioId = async (req, res) => {
         .status(404)
         .json({ message: "No se encontraron encuestas para este usuario" });
     }
-    console.log(encuestas);
 
     return res.status(200).json(encuestas);
   } catch (error) {
@@ -139,8 +136,6 @@ export const createEncuesta = async (req, res) => {
       /* respuestas, */ categoria,
       available,
     } = req.body;
-
-    console.log(req.userId);
 
     const newEncuesta = new Encuestas({
       nombre,
@@ -165,7 +160,6 @@ export const updateEncuesta = async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
-    console.log(updateData, "updateData");
 
     const encuestaData = await Encuestas.findById(id);
 
@@ -225,7 +219,6 @@ export const createRealizarEncuesta = async (req, res) => {
 
     const user = await User.findById(req.userId);
 
-    console.log(user, "user");
     user.encuestasRealizadas.push(encuestaRealizada);
     await user.save();
 

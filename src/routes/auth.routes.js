@@ -4,7 +4,7 @@ import {
   signin,
   signout,
   getUser,
-  getAllUsers,
+  getUsers,
 } from "../controllers/auth.controller.js";
 import {
   signupValidator,
@@ -20,7 +20,7 @@ router.post("/signup", signupValidator, signup);
 
 router.post("/signout", signout);
 
-router.get("/users", isAuth, getAllUsers);
+router.get("/users", isAuth, getUsers);
 
 router.get("/user", isAuth, getUser);
 

@@ -96,7 +96,7 @@ export const signout = (req, res) => {
   res.clearCookie("token").json({ message: "Sesión cerrada" });
 };
 
-export const getAllUsers = async (req, res) => {
+export const getUsers = async (req, res) => {
   try {
     const users = await User.find().populate("roles");
     res.status(200).json(users);
