@@ -222,7 +222,13 @@ export const createRealizarEncuesta = async (req, res) => {
     user.encuestasRealizadas.push(encuestaRealizada);
     await user.save();
 
-    return res.status(200).json({ message: "Encuesta realizada" });
+    console.log(user.encuestasRealizadas);
+
+    return res.status(200).json({
+      encuestaRealizada,
+      encuestaRealizadaId:
+        user.encuestasRealizadas[user.encuestasRealizadas.length - 1]._id,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
