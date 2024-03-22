@@ -23,6 +23,24 @@ const userSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
       },
     ],
+    encuestasRealizadas: [
+      {
+        encuesta: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Encuestas",
+        },
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+        preguntasRespuestas: [
+          {
+            pregunta: String,
+            respuestas: [String],
+          },
+        ],
+      },
+    ],
   },
   {
     timestamps: true,

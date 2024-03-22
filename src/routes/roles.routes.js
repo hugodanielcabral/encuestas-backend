@@ -16,7 +16,7 @@ router.get("/roles", getRoles);
 
 router.get("/roles/:id", getRol);
 
-router.post("/roles", isAuth, rolesValidator, createRol);
+router.post("/roles", rolesValidator, createRol);
 
 router.put("/roles/:id", isAuth, rolesValidator, updateRol);
 

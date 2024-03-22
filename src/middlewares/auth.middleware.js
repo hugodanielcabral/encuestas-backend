@@ -4,7 +4,6 @@ dotenv.config();
 
 //* Middleware para verificar si el usuario está autenticado
 export const isAuth = (req, res, next) => {
-  console.log(req.cookies.token);
   const token = req.cookies.token;
 
   if (!token) {

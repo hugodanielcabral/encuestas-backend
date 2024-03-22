@@ -54,6 +54,7 @@ export const signup = async (req, res) => {
       createdAt: userSaved.createdAt,
       updatedAt: userSaved.updatedAt,
       roles: userSaved.roles,
+      encuestasRealizadas: userSaved.encuestasRealizadas,
     });
   } catch (error) {
     console.error(error);
@@ -100,6 +101,7 @@ export const signin = async (req, res) => {
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
       roles: user.roles,
+      encuestasRealizadas: user.encuestasRealizadas,
     });
   } catch (error) {
     console.error(error);
@@ -110,3 +112,24 @@ export const signin = async (req, res) => {
 export const signout = (req, res) => {
   res.clearCookie("token").json({ message: "Sesión cerrada" });
 };
+
+export const getUsers = async (req, res) => {
+  try {
+    const users = await User.find().populate("roles");
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).populate("roles");
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
