@@ -7,24 +7,14 @@ export const signup = async (req, res) => {
   const { username, email, password, roles } = req.body;
 
   try {
-    // Verificar si el usuario o correo ya existe
     const userExists = await User.findOne({ email: email });
 
     if (userExists) {
       return res.status(400).json({ message: "El usuario o correo ya existe" });
     }
 
-    // Verificar si los roles existen
-    // const rolesExist = await Roles.find({ _id: { $in: roles } });
-
-    // if (roles.length !== rolesExist.length) {
-    //   return res.status(400).json({ message: "Uno o más roles no existen" });
-    // }
-
-    // Encriptar la contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Crear un nuevo usuario
     const newUser = new User({
       username,
       email,
@@ -32,19 +22,17 @@ export const signup = async (req, res) => {
       roles,
     });
 
-    // Guardar el usuario en la base de datos
     const userSaved = await newUser.save();
 
     await User.populate(userSaved, { path: "roles" });
 
-    // Crear un token de acceso
     const token = await createAccessToken({ id: userSaved._id });
     console.log(token);
     // Guardar el token en una cookie
     res.cookie("token", token, {
       sameSite: "None",
       // secure: true,
-      maxAge: 24 * 60 * 60 * 1000, // 1 dia
+      maxAge: 24 * 60 * 60 * 1000,
     });
 
     res.status(201).json({

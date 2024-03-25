@@ -10,6 +10,8 @@ import {
   signupValidator,
   signinValidator,
 } from "../validators/auth.validator.js";
+import { isAuth } from "../middlewares/auth.middleware.js";
+
 
 const router = Router();
 
@@ -19,7 +21,7 @@ router.post("/signup", signupValidator, signup);
 
 router.post("/signout", signout);
 
-router.get("/users", isAuth, getUsers);
+router.get("/users", isAuth,  getUsers);
 
 router.get("/user", isAuth, getUser);
 export default router;
